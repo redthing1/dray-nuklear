@@ -36,7 +36,7 @@
 module raylib_nuklear;
 
 import raylib;
-import nuklear;
+public import nuklear;
 
 extern (C) @nogc nothrow:
 
