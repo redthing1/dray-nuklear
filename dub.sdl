@@ -1,0 +1,12 @@
+name "dray-nuklear"
+description "raylib-nuklear bindings for dlang"
+authors "redthing1"
+copyright "Copyright (c) 2022, redthing1"
+license "apache-2.0"
+dependency "dray" version=">=4.2.0-r2 <4.3.0-0"
+targetType "library"
+configuration "default" {
+	targetType "library"
+	lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
+	preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src" platform="posix"
+}
