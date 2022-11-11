@@ -8,5 +8,6 @@ targetType "library"
 configuration "default" {
 	targetType "library"
 	lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
+	// preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src RELEASE=1" platform="posix"
 	preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src" platform="posix"
 }

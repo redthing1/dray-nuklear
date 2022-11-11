@@ -1,6 +1,6 @@
 # temp source
 dout
-raylib_source
+raylib_nuklear_source
 
 # Compiled Object files
 *.o
