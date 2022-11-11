@@ -53,10 +53,12 @@ int main(void) {
         if (nk_begin(ctx, "Demo", nk_rect(50, 50, 230, 250),
                 NK_WINDOW_BORDER | NK_WINDOW_MOVABLE | NK_WINDOW_SCALABLE |
                 NK_WINDOW_MINIMIZABLE | NK_WINDOW_TITLE)) {
-            enum {
-                EASY,
-                HARD
-            };
+            // enum {
+            //     EASY,
+            //     HARD
+            // };
+            enum EASY = 0;
+            enum HARD = 1;
             static int op = EASY;
             static int property = 20;
             nk_layout_row_static(ctx, 30, 80, 1);

@@ -5,6 +5,8 @@ copyright "Copyright (c) 2022, redthing1"
 license "apache-2.0"
 dependency "dray" version=">=4.2.0-r2 <4.3.0-0"
 targetType "library"
+
+libs "raylib_nuklear"
 configuration "default" {
 	targetType "library"
 	lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
