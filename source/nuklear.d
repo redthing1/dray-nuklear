@@ -3530,7 +3530,7 @@ enum nk_edit_flags
 enum nk_edit_types
 {
     NK_EDIT_SIMPLE = nk_edit_flags.NK_EDIT_ALWAYS_INSERT_MODE,
-    NK_EDIT_FIELD = NK_EDIT_SIMPLE | nk_edit_flags.NK_EDIT_SELECTABLE | nk_edit_flags.NK_EDIT_CLIPBOARD,
+    NK_EDIT_FIELD = cast(nk_edit_flags)NK_EDIT_SIMPLE | nk_edit_flags.NK_EDIT_SELECTABLE | nk_edit_flags.NK_EDIT_CLIPBOARD,
     NK_EDIT_BOX = nk_edit_flags.NK_EDIT_ALWAYS_INSERT_MODE | nk_edit_flags.NK_EDIT_SELECTABLE | nk_edit_flags.NK_EDIT_MULTILINE | nk_edit_flags.NK_EDIT_ALLOW_TAB | nk_edit_flags.NK_EDIT_CLIPBOARD,
     NK_EDIT_EDITOR = nk_edit_flags.NK_EDIT_SELECTABLE | nk_edit_flags.NK_EDIT_MULTILINE | nk_edit_flags.NK_EDIT_ALLOW_TAB | nk_edit_flags.NK_EDIT_CLIPBOARD
 }
@@ -3848,7 +3848,7 @@ int nk_stricmpn (const(char)* s1, const(char)* s2, int n);
 int nk_strtoi (const(char)* str, const(char*)* endptr);
 float nk_strtof (const(char)* str, const(char*)* endptr);
 
-enum NK_STRTOD = nk_strtod;
+alias NK_STRTOD = nk_strtod;
 double nk_strtod (const(char)* str, const(char*)* endptr);
 
 int nk_strfilter (const(char)* text, const(char)* regexp);
@@ -5265,8 +5265,8 @@ enum nk_panel_type
 enum nk_panel_set
 {
     NK_PANEL_SET_NONBLOCK = nk_panel_type.NK_PANEL_CONTEXTUAL | nk_panel_type.NK_PANEL_COMBO | nk_panel_type.NK_PANEL_MENU | nk_panel_type.NK_PANEL_TOOLTIP,
-    NK_PANEL_SET_POPUP = NK_PANEL_SET_NONBLOCK | nk_panel_type.NK_PANEL_POPUP,
-    NK_PANEL_SET_SUB = NK_PANEL_SET_POPUP | nk_panel_type.NK_PANEL_GROUP
+    NK_PANEL_SET_POPUP = cast(nk_panel_set)(NK_PANEL_SET_NONBLOCK | nk_panel_type.NK_PANEL_POPUP),
+    NK_PANEL_SET_SUB = cast(nk_panel_set)(NK_PANEL_SET_POPUP | nk_panel_type.NK_PANEL_GROUP)
 }
 
 struct nk_chart_slot
@@ -5485,7 +5485,6 @@ struct nk_window
  * flags, colors, fonts and for button_behavior. Each has it's own fixed size stack
  * which can be changed at compile time.
  */
-
 enum NK_BUTTON_BEHAVIOR_STACK_SIZE = 8;
 
 enum NK_FONT_STACK_SIZE = 8;
@@ -5502,92 +5501,64 @@ enum NK_COLOR_STACK_SIZE = 32;
 
 alias nk_float = float;
 
-struct nk_config_stack_style_item_element
-{
-    nk_style_item* address;
-    nk_style_item old_value;
+// #define NK_CONFIGURATION_STACK_TYPE(prefix, name, type)\
+//     struct nk_config_stack_##name##_element {\
+//         prefix##_##type *address;\
+//         prefix##_##type old_value;\
+//     }
+// #define NK_CONFIG_STACK(type,size)\
+//     struct nk_config_stack_##type {\
+//         int head;\
+//         struct nk_config_stack_##type##_element elements[size];\
+//     }
+template NK_CONFIGURATION_STACK_TYPE(string prefix, string name, string type) {
+    import std.format;
+    enum NK_CONFIGURATION_STACK_TYPE = 
+        format!"struct nk_config_stack_%s_element { %s_%s *address; %s_%s old_value; }"(name, prefix, type, prefix, type);
+}
+template NK_CONFIG_STACK(string type, string size) {
+    import std.format;
+    enum NK_CONFIG_STACK = format!"struct nk_config_stack_%s { int head; nk_config_stack_%s_element[%s] elements; }"(type, type, size);
 }
 
-struct nk_config_stack_float_element
-{
-    float* address;
-    float old_value;
-}
+// NK_CONFIGURATION_STACK_TYPE(struct nk, style_item, style_item);
+// NK_CONFIGURATION_STACK_TYPE(nk ,float, float);
+// NK_CONFIGURATION_STACK_TYPE(struct nk, vec2, vec2);
+// NK_CONFIGURATION_STACK_TYPE(nk ,flags, flags);
+// NK_CONFIGURATION_STACK_TYPE(struct nk, color, color);
+// NK_CONFIGURATION_STACK_TYPE(const struct nk, user_font, user_font*);
+// NK_CONFIGURATION_STACK_TYPE(enum nk, button_behavior, button_behavior);
+mixin(NK_CONFIGURATION_STACK_TYPE!("nk", "style_item", "style_item"));
+mixin(NK_CONFIGURATION_STACK_TYPE!("nk", "float", "float"));
+mixin(NK_CONFIGURATION_STACK_TYPE!("nk", "vec2", "vec2_"));
+mixin(NK_CONFIGURATION_STACK_TYPE!("nk", "flags", "flags"));
+mixin(NK_CONFIGURATION_STACK_TYPE!("nk", "color", "color"));
+mixin(NK_CONFIGURATION_STACK_TYPE!("const nk", "user_font", "user_font*"));
+mixin(NK_CONFIGURATION_STACK_TYPE!("nk", "button_behavior", "button_behavior"));
 
-struct nk_config_stack_vec2_element
-{
-    nk_vec2_* address;
-    nk_vec2_ old_value;
-}
+// NK_CONFIG_STACK(style_item, NK_STYLE_ITEM_STACK_SIZE);
+// NK_CONFIG_STACK(float, NK_FLOAT_STACK_SIZE);
+// NK_CONFIG_STACK(vec2, NK_VECTOR_STACK_SIZE);
+// NK_CONFIG_STACK(flags, NK_FLAGS_STACK_SIZE);
+// NK_CONFIG_STACK(color, NK_COLOR_STACK_SIZE);
+// NK_CONFIG_STACK(user_font, NK_FONT_STACK_SIZE);
+// NK_CONFIG_STACK(button_behavior, NK_BUTTON_BEHAVIOR_STACK_SIZE);
+mixin(NK_CONFIG_STACK!("style_item", "NK_STYLE_ITEM_STACK_SIZE"));
+mixin(NK_CONFIG_STACK!("float", "NK_FLOAT_STACK_SIZE"));
+mixin(NK_CONFIG_STACK!("vec2", "NK_VECTOR_STACK_SIZE"));
+mixin(NK_CONFIG_STACK!("flags", "NK_FLAGS_STACK_SIZE"));
+mixin(NK_CONFIG_STACK!("color", "NK_COLOR_STACK_SIZE"));
+mixin(NK_CONFIG_STACK!("user_font", "NK_FONT_STACK_SIZE"));
+mixin(NK_CONFIG_STACK!("button_behavior", "NK_BUTTON_BEHAVIOR_STACK_SIZE"));
 
-struct nk_config_stack_flags_element
-{
-    nk_flags* address;
-    nk_flags old_value;
-}
-
-struct nk_config_stack_color_element
-{
-    nk_color* address;
-    nk_color old_value;
-}
-
-struct nk_config_stack_user_font_element
-{
-    const(nk_user_font*)* address;
-    const(nk_user_font)* old_value;
-}
-
-struct nk_config_stack_button_behavior_element
-{
-    nk_button_behavior* address;
-    nk_button_behavior old_value;
-}
-
-struct nk_config_stack_style_item
-{
-    int head;
-    nk_config_stack_style_item_element[size] elements;
-}
-
-struct nk_config_stack_float
-{
-    int head;
-    nk_config_stack_float_element[size] elements;
-}
-
-struct nk_config_stack_vec2
-{
-    int head;
-    nk_config_stack_vec2_element[size] elements;
-}
-
-struct nk_config_stack_flags
-{
-    int head;
-    nk_config_stack_flags_element[size] elements;
-}
-
-struct nk_config_stack_color
-{
-    int head;
-    nk_config_stack_color_element[size] elements;
-}
-
-struct nk_config_stack_user_font
-{
-    int head;
-    nk_config_stack_user_font_element[size] elements;
-}
-
-struct nk_config_stack_button_behavior
-{
-    int head;
-    nk_config_stack_button_behavior_element[size] elements;
-}
-
-struct nk_configuration_stacks
-{
+struct nk_configuration_stacks {
+    // struct nk_config_stack_style_item style_items;
+    // struct nk_config_stack_float floats;
+    // struct nk_config_stack_vec2 vectors;
+    // struct nk_config_stack_flags flags;
+    // struct nk_config_stack_color colors;
+    // struct nk_config_stack_user_font fonts;
+    // struct nk_config_stack_button_behavior button_behaviors;
     nk_config_stack_style_item style_items;
     nk_config_stack_float floats;
     nk_config_stack_vec2 vectors;
