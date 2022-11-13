@@ -4,3 +4,5 @@ authors "redthing1"
 copyright "Copyright © 2020, redthing1"
 license "proprietary"
 dependency "dray-nuklear" path=".."
+
+subConfiguration "dray-nuklear" "debug"

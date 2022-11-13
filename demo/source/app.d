@@ -41,7 +41,8 @@ int main() {
 
     /* GUI */
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
-    auto ctx = InitNuklear(10);
+    // auto ctx = InitNuklear(10);
+    auto ctx = InitNuklearEx(raylib.GetFontDefault(), 10, 2);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
