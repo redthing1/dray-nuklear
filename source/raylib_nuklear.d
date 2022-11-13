@@ -51,6 +51,8 @@ Color ColorFromNuklear (nk_color color); // Convert a Nuklear color to a raylib 
 Color ColorFromNuklearF (nk_colorf color); // Convert a Nuklear floating color to a raylib Color
 Rectangle RectangleFromNuklear (nk_rect_ rect); // Convert a Nuklear rectangle to a raylib Rectangle
 nk_rect_ RectangleToNuklear (Rectangle rect); // Convert a raylib Rectangle to a Nuklear Rectangle
+Rectangle RectangleFromNuklearScaled (nk_context* ctx, nk_rect_ rect); // Convert a Nuklear rectangle to a raylib Rectangle with scale compensation
+nk_rect_ RectangleToNuklearScaled (nk_context* ctx, Rectangle rect); // Convert a raylib Rectangle to a Nuklear Rectangle with scale compensation
 nk_image_ TextureToNuklear (Texture tex); // Convert a raylib Texture to A Nuklear image
 Texture TextureFromNuklear (nk_image_ img); // Convert a Nuklear image to a raylib Texture
 nk_image_ LoadNuklearImage (const(char)* path); // Load a Nuklear image

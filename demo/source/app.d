@@ -33,10 +33,11 @@ int main() {
     // Initialization
     //--------------------------------------------------------------------------------------
     enum SCALE = 2;
-    const int screenWidth = 700;
-    const int screenHeight = 394;
-    // const int screenWidth = 700 * SCALE;
-    // const int screenHeight = 394 * SCALE;
+    
+    // const int screenWidth = 700;
+    // const int screenHeight = 394;
+    const int screenWidth = 700 * SCALE;
+    const int screenHeight = 394 * SCALE;
 
     InitWindow(screenWidth, screenHeight, "[raylib-nuklear] example");
 
@@ -46,7 +47,7 @@ int main() {
     /* GUI */
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
     auto ctx = InitNuklear(10);
-    // ctx.backend_render_scale = 2;
+    ctx.backend_render_scale = 2;
 
     nk_color[nk_style_colors.NK_COLOR_COUNT] table;
     table[nk_style_colors.NK_COLOR_TEXT] = nk_rgba(190, 190, 190, 255);
@@ -86,13 +87,10 @@ int main() {
         UpdateNuklear(ctx);
 
         // GUI
-        if (nk_begin(ctx, "Demo", nk_rect(50, 50, 230, 250),
-                nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_MOVABLE | nk_panel_flags.NK_WINDOW_SCALABLE |
-                nk_panel_flags.NK_WINDOW_MINIMIZABLE | nk_panel_flags.NK_WINDOW_TITLE)) {
-            // enum {
-            //     EASY,
-            //     HARD
-            // };
+        // auto window_bounds = nk_rect(0, 0, GetRenderWidth(), GetRenderHeight());
+        auto window_bounds = Rectangle(0, 0, GetRenderWidth(), GetRenderHeight());
+        if (nk_begin(ctx, "Demo", RectangleToNuklearScaled(ctx, window_bounds),
+            nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_TITLE)) {
             enum EASY = 0;
             enum HARD = 1;
             static int op = EASY;
