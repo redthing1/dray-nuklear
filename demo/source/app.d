@@ -34,23 +34,24 @@ int main() {
     // Initialization
     //--------------------------------------------------------------------------------------
 
-    const int screenWidth = 700;
-    const int screenHeight = 394;
-    const int font_size = 16;
+    enum SCREEN_WIDTH = 700;
+    enum SCREEN_HEIGHT = 394;
+    enum FONT_SIZE = 16;
+    enum PAD = 8;
 
-    InitWindow(screenWidth, screenHeight, "[raylib-nuklear] example");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "[raylib-nuklear] example");
 
     auto dpi_scale = cast(int) raylib.GetWindowScaleDPI().x;
     // resize window to match dpi_scale
-    raylib.SetWindowSize(screenWidth * dpi_scale, screenHeight * dpi_scale);
+    raylib.SetWindowSize(SCREEN_WIDTH * dpi_scale, SCREEN_HEIGHT * dpi_scale);
 
     SetTargetFPS(60); // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
     /* GUI */
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
-    auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", font_size, null, 0);
-    auto ctx = InitNuklearEx(ui_font, font_size);
+    auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", FONT_SIZE, null, 0);
+    auto ctx = InitNuklearEx(ui_font, FONT_SIZE);
     ctx.backend_render_scale = dpi_scale;
 
     // nk_color[nk_style_colors.NK_COLOR_COUNT] table;
@@ -83,6 +84,7 @@ int main() {
     // table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR_ACTIVE] = nk_rgba(75, 95, 105, 255);
     // table[nk_style_colors.NK_COLOR_TAB_HEADER] = nk_rgba(181, 45, 69, 220);
     // nk_style_from_table(ctx, cast(nk_color*) table);
+    ctx.style.button.padding.x = PAD;
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
