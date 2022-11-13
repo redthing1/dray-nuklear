@@ -7,9 +7,14 @@ dependency "dray" version=">=4.2.0-r2 <4.3.0-0"
 targetType "library"
 
 libs "raylib_nuklear"
-configuration "default" {
+lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
+
+configuration "release" {
 	targetType "library"
-	lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
 	preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src RELEASE=1" platform="posix"
-	// preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src RELEASE=0" platform="posix"
+}
+
+configuration "debug" {
+	targetType "library"
+	preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src" platform="posix"
 }
