@@ -28,17 +28,19 @@
 
 import raylib;
 import raylib_nuklear;
+import nuklear_ext;
 
 int main() {
     // Initialization
     //--------------------------------------------------------------------------------------
-    
+
     const int screenWidth = 700;
     const int screenHeight = 394;
+    const int font_size = 16;
 
     InitWindow(screenWidth, screenHeight, "[raylib-nuklear] example");
 
-    auto dpi_scale = cast(int)raylib.GetWindowScaleDPI().x;
+    auto dpi_scale = cast(int) raylib.GetWindowScaleDPI().x;
     // resize window to match dpi_scale
     raylib.SetWindowSize(screenWidth * dpi_scale, screenHeight * dpi_scale);
 
@@ -47,39 +49,40 @@ int main() {
 
     /* GUI */
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
-    auto ctx = InitNuklear(10);
+    auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", font_size, null, 0);
+    auto ctx = InitNuklearEx(ui_font, font_size);
     ctx.backend_render_scale = dpi_scale;
 
-    nk_color[nk_style_colors.NK_COLOR_COUNT] table;
-    table[nk_style_colors.NK_COLOR_TEXT] = nk_rgba(190, 190, 190, 255);
-    table[nk_style_colors.NK_COLOR_WINDOW] = nk_rgba(30, 33, 40, 215);
-    table[nk_style_colors.NK_COLOR_HEADER] = nk_rgba(181, 45, 69, 220);
-    table[nk_style_colors.NK_COLOR_BORDER] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_BUTTON] = nk_rgba(181, 45, 69, 255);
-    table[nk_style_colors.NK_COLOR_BUTTON_HOVER] = nk_rgba(190, 50, 70, 255);
-    table[nk_style_colors.NK_COLOR_BUTTON_ACTIVE] = nk_rgba(195, 55, 75, 255);
-    table[nk_style_colors.NK_COLOR_TOGGLE] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_TOGGLE_HOVER] = nk_rgba(45, 60, 60, 255);
-    table[nk_style_colors.NK_COLOR_TOGGLE_CURSOR] = nk_rgba(181, 45, 69, 255);
-    table[nk_style_colors.NK_COLOR_SELECT] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_SELECT_ACTIVE] = nk_rgba(181, 45, 69, 255);
-    table[nk_style_colors.NK_COLOR_SLIDER] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_SLIDER_CURSOR] = nk_rgba(181, 45, 69, 255);
-    table[nk_style_colors.NK_COLOR_SLIDER_CURSOR_HOVER] = nk_rgba(186, 50, 74, 255);
-    table[nk_style_colors.NK_COLOR_SLIDER_CURSOR_ACTIVE] = nk_rgba(191, 55, 79, 255);
-    table[nk_style_colors.NK_COLOR_PROPERTY] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_EDIT] = nk_rgba(51, 55, 67, 225);
-    table[nk_style_colors.NK_COLOR_EDIT_CURSOR] = nk_rgba(190, 190, 190, 255);
-    table[nk_style_colors.NK_COLOR_COMBO] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_CHART] = nk_rgba(51, 55, 67, 255);
-    table[nk_style_colors.NK_COLOR_CHART_COLOR] = nk_rgba(170, 40, 60, 255);
-    table[nk_style_colors.NK_COLOR_CHART_COLOR_HIGHLIGHT] = nk_rgba(255, 0, 0, 255);
-    table[nk_style_colors.NK_COLOR_SCROLLBAR] = nk_rgba(30, 33, 40, 255);
-    table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR] = nk_rgba(64, 84, 95, 255);
-    table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR_HOVER] = nk_rgba(70, 90, 100, 255);
-    table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR_ACTIVE] = nk_rgba(75, 95, 105, 255);
-    table[nk_style_colors.NK_COLOR_TAB_HEADER] = nk_rgba(181, 45, 69, 220);
-    nk_style_from_table(ctx, cast(nk_color*) table);
+    // nk_color[nk_style_colors.NK_COLOR_COUNT] table;
+    // table[nk_style_colors.NK_COLOR_TEXT] = nk_rgba(190, 190, 190, 255);
+    // table[nk_style_colors.NK_COLOR_WINDOW] = nk_rgba(30, 33, 40, 215);
+    // table[nk_style_colors.NK_COLOR_HEADER] = nk_rgba(181, 45, 69, 220);
+    // table[nk_style_colors.NK_COLOR_BORDER] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_BUTTON] = nk_rgba(181, 45, 69, 255);
+    // table[nk_style_colors.NK_COLOR_BUTTON_HOVER] = nk_rgba(190, 50, 70, 255);
+    // table[nk_style_colors.NK_COLOR_BUTTON_ACTIVE] = nk_rgba(195, 55, 75, 255);
+    // table[nk_style_colors.NK_COLOR_TOGGLE] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_TOGGLE_HOVER] = nk_rgba(45, 60, 60, 255);
+    // table[nk_style_colors.NK_COLOR_TOGGLE_CURSOR] = nk_rgba(181, 45, 69, 255);
+    // table[nk_style_colors.NK_COLOR_SELECT] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_SELECT_ACTIVE] = nk_rgba(181, 45, 69, 255);
+    // table[nk_style_colors.NK_COLOR_SLIDER] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_SLIDER_CURSOR] = nk_rgba(181, 45, 69, 255);
+    // table[nk_style_colors.NK_COLOR_SLIDER_CURSOR_HOVER] = nk_rgba(186, 50, 74, 255);
+    // table[nk_style_colors.NK_COLOR_SLIDER_CURSOR_ACTIVE] = nk_rgba(191, 55, 79, 255);
+    // table[nk_style_colors.NK_COLOR_PROPERTY] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_EDIT] = nk_rgba(51, 55, 67, 225);
+    // table[nk_style_colors.NK_COLOR_EDIT_CURSOR] = nk_rgba(190, 190, 190, 255);
+    // table[nk_style_colors.NK_COLOR_COMBO] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_CHART] = nk_rgba(51, 55, 67, 255);
+    // table[nk_style_colors.NK_COLOR_CHART_COLOR] = nk_rgba(170, 40, 60, 255);
+    // table[nk_style_colors.NK_COLOR_CHART_COLOR_HIGHLIGHT] = nk_rgba(255, 0, 0, 255);
+    // table[nk_style_colors.NK_COLOR_SCROLLBAR] = nk_rgba(30, 33, 40, 255);
+    // table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR] = nk_rgba(64, 84, 95, 255);
+    // table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR_HOVER] = nk_rgba(70, 90, 100, 255);
+    // table[nk_style_colors.NK_COLOR_SCROLLBAR_CURSOR_ACTIVE] = nk_rgba(75, 95, 105, 255);
+    // table[nk_style_colors.NK_COLOR_TAB_HEADER] = nk_rgba(181, 45, 69, 220);
+    // nk_style_from_table(ctx, cast(nk_color*) table);
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
@@ -91,7 +94,7 @@ int main() {
         // auto window_bounds = nk_rect(0, 0, GetRenderWidth(), GetRenderHeight());
         auto window_bounds = Rectangle(0, 0, GetRenderWidth(), GetRenderHeight());
         if (nk_begin(ctx, "Demo", RectangleToNuklearScaled(ctx, window_bounds),
-            nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_TITLE)) {
+                nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_TITLE)) {
             enum EASY = 0;
             enum HARD = 1;
             static int op = EASY;
@@ -122,6 +125,21 @@ int main() {
                 bg.a = nk_propertyf(ctx, "#A:", 0, bg.a, 1.0f, 0.01f, 0.005f);
                 nk_combo_end(ctx);
             }
+
+            nk_style_push_vec2(ctx, &ctx.style.window.spacing, nk_vec2(0, 0));
+            nk_style_push_float(ctx, &ctx.style.button.rounding, 0);
+            nk_layout_row_begin(ctx, nk_layout_format.NK_STATIC, 30, 2);
+            enum TAB1 = 0;
+            enum TAB2 = 1;
+            static int tab_state = TAB1;
+            if (nk_tab(ctx, "TAB1", tab_state == TAB1)) {
+                tab_state = TAB1;
+            }
+            if (nk_tab(ctx, "TAB2", tab_state == TAB2)) {
+                tab_state = TAB2;
+            }
+            nk_style_pop_float(ctx);
+            nk_style_pop_vec2(ctx);
         }
 
         nk_end(ctx);
