@@ -32,8 +32,12 @@ import raylib_nuklear;
 int main() {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 700 * 2;
-    const int screenHeight = 394 * 2;
+    enum SCALE = 2;
+    const int screenWidth = 700;
+    const int screenHeight = 394;
+    // const int screenWidth = 700 * SCALE;
+    // const int screenHeight = 394 * SCALE;
+
     InitWindow(screenWidth, screenHeight, "[raylib-nuklear] example");
 
     SetTargetFPS(60); // Set our game to run at 60 frames-per-second
@@ -42,7 +46,7 @@ int main() {
     /* GUI */
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
     auto ctx = InitNuklear(10);
-    ctx.backend_render_scale = 2;
+    // ctx.backend_render_scale = 2;
 
     nk_color[nk_style_colors.NK_COLOR_COUNT] table;
     table[nk_style_colors.NK_COLOR_TEXT] = nk_rgba(190, 190, 190, 255);
