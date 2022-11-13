@@ -41,7 +41,7 @@ public import nuklear;
 extern (C) @nogc nothrow:
 
 nk_context* InitNuklear (int fontSize); // Initialize the Nuklear GUI context
-nk_context* InitNuklearEx (Font font, float fontSize, int renderScale); // Initialize the Nuklear GUI context, with a custom font
+nk_context* InitNuklearEx (Font font, float fontSize); // Initialize the Nuklear GUI context, with a custom font
 void UpdateNuklear (nk_context* ctx); // Update the input state and internal components for Nuklear
 void DrawNuklear (nk_context* ctx); // Render the Nuklear GUI on the screen
 void UnloadNuklear (nk_context* ctx); // Deinitialize the Nuklear context
