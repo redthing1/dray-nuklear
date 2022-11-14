@@ -52,7 +52,7 @@ int main() {
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
     auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", FONT_SIZE, null, 0);
     auto ctx = InitNuklearEx(ui_font, FONT_SIZE);
-    ctx.backend_render_scale = dpi_scale;
+    SetNuklearScaling(ctx, dpi_scale);
 
     // nk_color[nk_style_colors.NK_COLOR_COUNT] table;
     // table[nk_style_colors.NK_COLOR_TEXT] = nk_rgba(190, 190, 190, 255);
@@ -95,7 +95,7 @@ int main() {
         // GUI
         // auto window_bounds = nk_rect(0, 0, GetRenderWidth(), GetRenderHeight());
         auto window_bounds = Rectangle(0, 0, GetRenderWidth(), GetRenderHeight());
-        if (nk_begin(ctx, "Demo", RectangleToNuklearScaled(ctx, window_bounds),
+        if (nk_begin(ctx, "Demo", RectangleToNuklear(ctx, window_bounds),
                 nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_TITLE)) {
             enum EASY = 0;
             enum HARD = 1;
