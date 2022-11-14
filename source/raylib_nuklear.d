@@ -47,12 +47,12 @@ void DrawNuklear (nk_context* ctx); // Render the Nuklear GUI on the screen
 void UnloadNuklear (nk_context* ctx); // Deinitialize the Nuklear context
 nk_color ColorToNuklear (Color color); // Convert a raylib Color to a Nuklear color object
 nk_colorf ColorToNuklearF (Color color); // Convert a raylib Color to a Nuklear floating color
-Color_ ColorFromNuklear (nk_color color); // Convert a Nuklear color to a raylib Color
-Color_ ColorFromNuklearF (nk_colorf color); // Convert a Nuklear floating color to a raylib Color
-Rectangle_ RectangleFromNuklear (nk_context* ctx, nk_rect_ rect); // Convert a Nuklear rectangle to a raylib Rectangle
+Color ColorFromNuklear (nk_color color); // Convert a Nuklear color to a raylib Color
+Color ColorFromNuklearF (nk_colorf color); // Convert a Nuklear floating color to a raylib Color
+Rectangle RectangleFromNuklear (nk_context* ctx, nk_rect_ rect); // Convert a Nuklear rectangle to a raylib Rectangle
 nk_rect_ RectangleToNuklear (nk_context* ctx, Rectangle rect); // Convert a raylib Rectangle to a Nuklear Rectangle
 nk_image_ TextureToNuklear (Texture tex); // Convert a raylib Texture to A Nuklear image
-Texture_ TextureFromNuklear (nk_image_ img); // Convert a Nuklear image to a raylib Texture
+Texture TextureFromNuklear (nk_image_ img); // Convert a Nuklear image to a raylib Texture
 nk_image_ LoadNuklearImage (const(char)* path); // Load a Nuklear image
 void UnloadNuklearImage (nk_image_ img); // Unload a Nuklear image. And free its data
 void CleanupNuklearImage (nk_image_ img); // Frees the data stored by the Nuklear image
