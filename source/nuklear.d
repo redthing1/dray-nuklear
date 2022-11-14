@@ -5628,8 +5628,6 @@ struct nk_context
     nk_configuration_stacks stacks;
     float delta_time_seconds;
 
-    uint backend_render_scale;
-
     /* private:
         should only be accessed if you
         know what you are doing */
