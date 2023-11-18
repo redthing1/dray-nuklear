@@ -42,8 +42,6 @@ int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "[raylib-nuklear] example");
 
     auto dpi_scale = cast(int) raylib.GetWindowScaleDPI().x;
-    // resize window to match dpi_scale
-    raylib.SetWindowSize(SCREEN_WIDTH * dpi_scale, SCREEN_HEIGHT * dpi_scale);
 
     SetTargetFPS(60); // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -52,7 +50,14 @@ int main() {
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
     auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", FONT_SIZE, null, 0);
     auto ctx = InitNuklearEx(ui_font, FONT_SIZE);
-    SetNuklearScaling(ctx, dpi_scale);
+
+    version (OSX) {
+        // macOS does DPI scaling transparently, so we don't need to do anything.
+    } else {
+        // resize window to match dpi_scale
+        raylib.SetWindowSize(SCREEN_WIDTH * dpi_scale, SCREEN_HEIGHT * dpi_scale);
+        SetNuklearScaling(ctx, dpi_scale);
+    }
 
     // nk_color[nk_style_colors.NK_COLOR_COUNT] table;
     // table[nk_style_colors.NK_COLOR_TEXT] = nk_rgba(190, 190, 190, 255);
@@ -117,7 +122,7 @@ int main() {
                 static int op = EASY;
 
                 nk_layout_row_dynamic(ctx, PAD, 1);
-                
+
                 nk_layout_row_static(ctx, 30, 80, 1);
                 if (nk_button_label(ctx, "button"))
                     TraceLog(TraceLogLevel.LOG_INFO, "button pressed");
