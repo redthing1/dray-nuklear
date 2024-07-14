@@ -10,6 +10,9 @@ libs "raylib_nuklear"
 lflags "-lglew" "-lglfw" "-framework" "OpenGL" "-L/opt/homebrew/lib" "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="osx"
 lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
 
+// include the nuklear headers
+cImportPaths "$PACKAGE_DIR/raylib_nuklear_source/include" platform="posix"
+
 configuration "release" {
 	targetType "library"
 	preGenerateCommands "bash $PACKAGE_DIR/build-clib.sh EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src RELEASE=1" platform="posix"
