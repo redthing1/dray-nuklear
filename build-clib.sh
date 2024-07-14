@@ -11,7 +11,7 @@ HOST="dray-nuklear"
 LIB_NAME="raylib_nuklear"
 SOURCETREE_URL="https://github.com/redthing1/raylib-nuklear.git"
 SOURCETREE_DIR="raylib_nuklear_source"
-SOURCETREE_BRANCH="master"
+SOURCETREE_BRANCH="v0.5.0-r1"
 LIB_FILE_1="libraylib_nuklear.a"
 
 BUILD_ARGS=$@
