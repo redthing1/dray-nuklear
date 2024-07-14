@@ -99,7 +99,10 @@ int main() {
 
         // GUI
         // auto window_bounds = nk_rect(0, 0, GetRenderWidth(), GetRenderHeight());
-        auto window_bounds = Rectangle(0, 0, GetRenderWidth(), GetRenderHeight());
+        auto window_bounds = Rectangle(0, 0,
+            GetRenderWidth() / GetWindowScaleDPI().x,
+            GetRenderHeight() / GetWindowScaleDPI().x
+        );
         if (nk_begin(ctx, "Demo", RectangleToNuklear(ctx, window_bounds),
                 nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_TITLE)) {
             enum EASY = 0;
