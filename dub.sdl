@@ -3,7 +3,7 @@ description "raylib-nuklear bindings for dlang"
 authors "redthing1"
 copyright "Copyright (c) 2022, redthing1"
 license "apache-2.0"
-dependency "dray" version=">=4.2.0-r3 <4.3.0-0"
+dependency "dray" version=">=5.0.0-r1 <5.1.0-0"
 targetType "library"
 
 libs "raylib_nuklear"
