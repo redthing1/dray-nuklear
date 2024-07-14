@@ -48,7 +48,7 @@ echo "[$HOST] starting build of $LIB_NAME"
 #
 # build the library
 make clean
-make -j$(nproc) $BUILD_ARGS
+make $BUILD_ARGS
 #
 # END BUILD
 #
