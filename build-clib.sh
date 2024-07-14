@@ -48,6 +48,7 @@ echo "[$HOST] starting build of $LIB_NAME"
 #
 # build the library
 make clean
+mkdir build # create build directory
 make $BUILD_ARGS
 #
 # END BUILD
