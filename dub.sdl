@@ -6,11 +6,11 @@ license "apache-2.0"
 dependency "dray" version=">=5.0.0-r1 <5.1.0-0"
 targetType "library"
 
-libs "raylib_nuklear"
+libs "rlnuklear"
 
 lflags "WinMM.lib" "OLDNAMES.lib" "MSVCRT.lib" "$PACKAGE_DIR/raylib.lib" "$PACKAGE_DIR/*.lib $PACKAGE_DIR/glfw3_mt.lib" "user32.lib" "gdi32.lib" platform="windows"
-lflags "-lglew" "-lglfw" "-framework" "OpenGL" "-L/opt/homebrew/lib" "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="osx"
-lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/libraylib_nuklear.a" platform="posix"
+lflags "-lglew" "-lglfw" "-framework" "OpenGL" "-L/opt/homebrew/lib" "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="osx"
+lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="linux"
 
 // include the nuklear headers
 cImportPaths "raylib_nuklear_source/include"

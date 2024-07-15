@@ -8,7 +8,8 @@ LIB_NAME="raylib_nuklear"
 SOURCETREE_URL="https://github.com/redthing1/raylib-nuklear.git"
 SOURCETREE_DIR="raylib_nuklear_source"
 SOURCETREE_BRANCH="master"
-LIB_FILE_1="libraylib_nuklear.a"
+LIB_FILE_NAME="librlnuklear.a"
+LIB_FILE_BUILD_NAME="build/librlnuklear.a"
 PACKAGE_DIR=$(dirname "$0")
 
 # Utility variables
@@ -76,14 +77,18 @@ build() {
     cmake_args_string="${cmake_args[*]}"
     
     # START BUILD
-    rm -rf build
     cmake -B build -S . $cmake_args
     cmake --build build --config Release
     # END BUILD
 
     echo "[$HOST] finished build of $LIB_NAME"
-    echo "[$HOST] copying $LIB_NAME binary ($LIB_FILE_1) to $PACKAGE_DIR"
-    $LN -vrfs $(pwd)/$LIB_FILE_1 $PACKAGE_DIR/$LIB_FILE_1
+    echo "[$HOST] linking $LIB_NAME binary ($LIB_FILE_NAME) to $PACKAGE_DIR"
+    $LN -vrfs $(pwd)/$LIB_FILE_BUILD_NAME $PACKAGE_DIR/$LIB_FILE_NAME
+    # ensure the library is available
+    if [ ! -f "$PACKAGE_DIR/$LIB_FILE_NAME" ]; then
+        echo "Error: $LIB_NAME library not found at $PACKAGE_DIR/$LIB_FILE_NAME"
+        exit 1
+    fi
 }
 
 # Main execution
