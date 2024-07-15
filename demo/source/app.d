@@ -39,24 +39,24 @@ int main() {
     enum FONT_SIZE = 16;
     enum PAD = 8;
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "[raylib-nuklear] example");
+    raylib.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "[raylib-nuklear] example");
 
     auto dpi_scale = cast(int) raylib.GetWindowScaleDPI().x;
 
-    SetTargetFPS(60); // Set our game to run at 60 frames-per-second
+    raylib.SetTargetFPS(60); // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
     /* GUI */
-    auto bg = ColorToNuklearF(Colors.SKYBLUE);
+    auto bg = rlnuklear.ColorToNuklearF(cast(rlnuklear.Color) raylib.Colors.SKYBLUE);
     auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", FONT_SIZE, null, 0);
-    auto ctx = InitNuklearEx(ui_font, FONT_SIZE);
+    auto ctx = rlnuklear.InitNuklearEx(cast(rlnuklear.Font) ui_font, FONT_SIZE);
 
     version (OSX) {
         // macOS does DPI scaling transparently, so we don't need to do anything.
     } else {
         // resize window to match dpi_scale
         raylib.SetWindowSize(SCREEN_WIDTH * dpi_scale, SCREEN_HEIGHT * dpi_scale);
-        SetNuklearScaling(ctx, dpi_scale);
+        rlnuklear.SetNuklearScaling(ctx, dpi_scale);
     }
 
     // nk_color[nk_style_colors.NK_COLOR_COUNT] table;
@@ -92,18 +92,19 @@ int main() {
     ctx.style.button.padding.x = PAD;
 
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!raylib.WindowShouldClose()) // Detect window close button or ESC key
     {
         // Update
-        UpdateNuklear(ctx);
+        rlnuklear.UpdateNuklear(ctx);
 
         // GUI
         // auto window_bounds = nk_rect(0, 0, GetRenderWidth(), GetRenderHeight());
         auto window_bounds = Rectangle(0, 0,
-            GetRenderWidth() / GetWindowScaleDPI().x,
+            GetRenderWidth() / GetWindowScaleDPI()
+                .x,
             GetRenderHeight() / GetWindowScaleDPI().x
         );
-        if (nk_begin(ctx, "Demo", RectangleToNuklear(ctx, window_bounds),
+        if (nk_begin(ctx, "Demo", rlnuklear.RectangleToNuklear(ctx, cast(rlnuklear.Rectangle) window_bounds),
                 nk_panel_flags.NK_WINDOW_BORDER | nk_panel_flags.NK_WINDOW_TITLE)) {
             enum EASY = 0;
             enum HARD = 1;
@@ -168,9 +169,9 @@ int main() {
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-        ClearBackground(ColorFromNuklearF(bg));
+        ClearBackground(cast(raylib.Color) rlnuklear.ColorFromNuklearF(bg));
 
-        DrawNuklear(ctx);
+        rlnuklear.DrawNuklear(ctx);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -178,7 +179,7 @@ int main() {
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadNuklear(ctx); // Unload the Nuklear GUI
+    rlnuklear.UnloadNuklear(ctx); // Unload the Nuklear GUI
     CloseWindow();
     //--------------------------------------------------------------------------------------
 
