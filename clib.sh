@@ -3,7 +3,7 @@
 set -e
 
 # Common variables
-HOST="dray-nuklear"
+PROJECT="dray-nuklear"
 LIB_NAME="raylib_nuklear"
 SOURCETREE_URL="https://github.com/redthing1/raylib-nuklear.git"
 SOURCETREE_DIR="raylib_nuklear_source"
@@ -40,24 +40,24 @@ ensure_command "cmake"
 
 # Function to prepare the source
 prepare() {
-    echo "[$HOST] preparing $LIB_NAME source..."
+    echo "[$PROJECT] preparing $LIB_NAME source..."
     cd "$PACKAGE_DIR"
     
     if [ -d $SOURCETREE_DIR ]; then
-        echo "[$HOST] source folder already exists, using it."
+        echo "[$PROJECT] source folder already exists, using it."
     else
-        echo "[$HOST] getting source to build $LIB_NAME"
+        echo "[$PROJECT] getting source to build $LIB_NAME"
         git clone --depth 1 --branch $SOURCETREE_BRANCH $SOURCETREE_URL $SOURCETREE_DIR
     fi
 
     cd $SOURCETREE_DIR
     git submodule update --init --recursive
-    echo "[$HOST] finished preparing $LIB_NAME source"
+    echo "[$PROJECT] finished preparing $LIB_NAME source"
 }
 
 # Function to build the library
 build() {
-    echo "[$HOST] starting build of $LIB_NAME"
+    echo "[$PROJECT] starting build of $LIB_NAME"
     cd "$PACKAGE_DIR/$SOURCETREE_DIR"
 
     # set up build args
@@ -81,8 +81,8 @@ build() {
     cmake --build build --config Release
     # END BUILD
 
-    echo "[$HOST] finished build of $LIB_NAME"
-    echo "[$HOST] linking $LIB_NAME binary ($LIB_FILE_NAME) to $PACKAGE_DIR"
+    echo "[$PROJECT] finished build of $LIB_NAME"
+    echo "[$PROJECT] linking $LIB_NAME binary ($LIB_FILE_NAME) to $PACKAGE_DIR"
     $LN -vrfs $(pwd)/$LIB_FILE_BUILD_NAME $PACKAGE_DIR/$LIB_FILE_NAME
     # ensure the library is available
     if [ ! -f "$PACKAGE_DIR/$LIB_FILE_NAME" ]; then

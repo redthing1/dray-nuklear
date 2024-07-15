@@ -1,5 +1,5 @@
 # Common variables
-$HOST = "dray-nuklear"
+$PROJECT = "dray-nuklear"
 $LIB_NAME = "raylib_nuklear"
 $SOURCETREE_URL = "https://github.com/redthing1/raylib-nuklear.git"
 $SOURCETREE_DIR = "raylib_nuklear_source"
@@ -29,24 +29,24 @@ Ensure-Command "cmake"
 
 # Function to prepare the source
 function Prepare-Source {
-    Write-Host "[$HOST] preparing $LIB_NAME source..."
+    Write-Host "[$PROJECT] preparing $LIB_NAME source..."
     Set-Location $PACKAGE_DIR
     
     if (Test-Path $SOURCETREE_DIR) {
-        Write-Host "[$HOST] source folder already exists, using it."
+        Write-Host "[$PROJECT] source folder already exists, using it."
     } else {
-        Write-Host "[$HOST] getting source to build $LIB_NAME"
+        Write-Host "[$PROJECT] getting source to build $LIB_NAME"
         git clone --depth 1 --branch $SOURCETREE_BRANCH $SOURCETREE_URL $SOURCETREE_DIR
     }
 
     Set-Location $SOURCETREE_DIR
     git submodule update --init --recursive
-    Write-Host "[$HOST] finished preparing $LIB_NAME source"
+    Write-Host "[$PROJECT] finished preparing $LIB_NAME source"
 }
 
 # Function to build the library
 function Build-Library {
-    Write-Host "[$HOST] starting build of $LIB_NAME"
+    Write-Host "[$PROJECT] starting build of $LIB_NAME"
     Set-Location "$PACKAGE_DIR\$SOURCETREE_DIR"
 
     # set up build args
@@ -70,8 +70,8 @@ function Build-Library {
     cmake --build build --config Release
     # END BUILD
 
-    Write-Host "[$HOST] finished build of $LIB_NAME"
-    Write-Host "[$HOST] copying $LIB_NAME binary ($LIB_FILE_NAME) to $PACKAGE_DIR"
+    Write-Host "[$PROJECT] finished build of $LIB_NAME"
+    Write-Host "[$PROJECT] copying $LIB_NAME binary ($LIB_FILE_NAME) to $PACKAGE_DIR"
     Copy-Item -Path $LIB_FILE_BUILD_NAME -Destination $PACKAGE_DIR -Force
     # ensure the library is available
     if (-not (Test-Path "$PACKAGE_DIR\$LIB_FILE_NAME")) {
