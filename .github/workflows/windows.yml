@@ -22,14 +22,10 @@ jobs:
         unzip glfw-3.3.7.bin.WIN64.zip
         move glfw-3.3.7.bin.WIN64/lib-vc2022/glfw3_mt.lib ./glfw3_mt.lib
 
-        echo "create dray override with libs"
-        mkdir ext
-        cd ext
-        git clone --depth 1 --branch v$env:DRAY_VERSION https://github.com/redthing1/dray
-        cd dray
-        copy ../../raylib-dev_win64_msvc16/lib/raylib.lib ./raylib.lib
-        cd ../..
-        dub add-override dray $env:DRAY_VERSION ./ext/dray
+        echo "prebuild dray with libs"
+        dub fetch dray@$env:DRAY_VERSION
+        set DRAY_PATH=C:/Users/runneradmin/AppData/Local/dub/packages/dray-$env:DRAY_VERSION/dray
+        copy raylib-dev_win64_msvc16/lib/raylib.lib %DRAY_PATH%/raylib.lib
 
         echo "show files"
         dir
