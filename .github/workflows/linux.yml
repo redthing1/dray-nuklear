@@ -5,7 +5,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        dc: [ dmd-2.100.2 ]
+        dc: [ ldc-1.39.0 ]
         arch: [ x86_64 ]
     runs-on: ${{ matrix.os }}
     steps:
