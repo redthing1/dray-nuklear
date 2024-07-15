@@ -51,6 +51,7 @@ function Build-Library {
 
     # list RAYLIB_DIR
     Write-Host "RAYLIB_DIR: $env:RAYLIB_DIR"
+    Get-ChildItem $env:RAYLIB_DIR
 
     # set up build args
     $cmake_args = @()
