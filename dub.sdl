@@ -20,10 +20,10 @@ preGenerateCommands "bash $PACKAGE_DIR/clib.sh prepare" platform="posix"
 
 configuration "release" {
 	targetType "library"
-	preBuildCommands "bash $PACKAGE_DIR/clib.sh build EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src RELEASE=1" platform="posix"
+	preBuildCommands "bash $PACKAGE_DIR/clib.sh build RAYLIB_DIR=$DRAY_PACKAGE_DIR/raylib_source RELEASE=1" platform="posix"
 }
 
 configuration "debug" {
 	targetType "library"
-	preBuildCommands "bash $PACKAGE_DIR/clib.sh build EXTRA_INCLUDES=-I$DRAY_PACKAGE_DIR/raylib_source/src" platform="posix"
+	preBuildCommands "bash $PACKAGE_DIR/clib.sh build RAYLIB_DIR=$DRAY_PACKAGE_DIR/raylib_source" platform="posix"
 }
