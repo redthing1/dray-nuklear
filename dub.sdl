@@ -3,14 +3,13 @@ description "raylib-nuklear bindings for dlang"
 authors "redthing1"
 copyright "Copyright (c) 2022, redthing1"
 license "apache-2.0"
-dependency "dray" version=">=5.0.0-r1 <5.1.0-0"
+dependency "dray" version=">=5.0.0-r3 <5.1.0-0"
 targetType "library"
 
 libs "rlnuklear"
 
-lflags "WinMM.lib" "OLDNAMES.lib" "MSVCRT.lib" "$PACKAGE_DIR/raylib.lib" "$PACKAGE_DIR/*.lib $PACKAGE_DIR/glfw3_mt.lib" "user32.lib" "gdi32.lib" platform="windows"
-lflags "-lglew" "-lglfw" "-framework" "OpenGL" "-L/opt/homebrew/lib" "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="osx"
-lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="linux"
+lflags "$PACKAGE_DIR/rlnuklear.lib" platform="windows"
+lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="posix"
 
 // include the nuklear headers
 cImportPaths "raylib_nuklear_source/include"
