@@ -49,6 +49,9 @@ function Build-Library {
     Write-Host "[$PROJECT] starting build of $LIB_NAME"
     Set-Location "$PACKAGE_DIR\$SOURCETREE_DIR"
 
+    # list RAYLIB_DIR
+    Write-Host "RAYLIB_DIR: $env:RAYLIB_DIR"
+
     # set up build args
     $cmake_args = @()
     if (-not $env:RAYLIB_DIR) {
