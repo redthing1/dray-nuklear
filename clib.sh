@@ -9,7 +9,7 @@ SOURCETREE_URL="https://github.com/redthing1/raylib-nuklear.git"
 SOURCETREE_DIR="raylib_nuklear_source"
 SOURCETREE_BRANCH="master"
 LIB_FILE_NAME="librlnuklear.a"
-LIB_FILE_BUILD_NAME="build/librlnuklear.a"
+LIB_FILE_BUILD_NAME="build/$LIB_FILE_NAME"
 PACKAGE_DIR=$(dirname "$0")
 
 # Utility variables
