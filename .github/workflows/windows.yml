@@ -37,6 +37,7 @@ jobs:
       run: |
         dub add-override dray $env:DRAY_VERSION ./ext/dray
         move ext/dray/raylib.lib ./raylib.lib
+        dir
         dub build
     
     - name: 'Build Demo'
