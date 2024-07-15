@@ -25,8 +25,10 @@ jobs:
         echo "prebuild dray with libs"
         dub fetch dray@$env:DRAY_VERSION
         set DRAY_PATH=C:/Users/runneradmin/AppData/Local/dub/packages/dray-$env:DRAY_VERSION/dray
-        copy raylib-dev_win64_msvc16/lib/raylib.lib %DRAY_PATH%/raylib.lib
-        copy glfw3_mt.lib %DRAY_PATH%/glfw3_mt.lib
+        dub list dray@$env:DRAY_VERSION
+        copy raylib-dev_win64_msvc16/lib/raylib.lib $env:DRAY_PATH/raylib.lib
+        copy glfw3_mt.lib $env:DRAY_PATH/glfw3_mt.lib
+        dub build dray@$env:DRAY_VERSION --compiler=ldc2 --build=release
 
         echo "show files"
         dir
