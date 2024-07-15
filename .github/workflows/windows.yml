@@ -8,7 +8,9 @@ jobs:
       DRAY_VERSION: 5.0.0-r3
     steps:
     - uses: actions/checkout@v3
-    - uses: dlang-community/setup-dlang@4c99aa991ce7d19dd3064de0a4f2f6b2f152e2d7
+    - uses: dlang-community/setup-dlang@v2
+      with:
+        compiler: ldc
     - name: 'Setup Windows Build Environment'
       run: |
         git submodule update --init --recursive
@@ -28,7 +30,7 @@ jobs:
         dub list dray@$env:DRAY_VERSION
         copy raylib-dev_win64_msvc16/lib/raylib.lib $env:DRAY_PATH/raylib.lib
         copy glfw3_mt.lib $env:DRAY_PATH/glfw3_mt.lib
-        dub build dray@$env:DRAY_VERSION --compiler=ldc2 --build=release
+        dub build dray@$env:DRAY_VERSION
 
         echo "show files"
         dir
