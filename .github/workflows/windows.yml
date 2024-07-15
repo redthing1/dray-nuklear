@@ -26,6 +26,7 @@ jobs:
         dub fetch dray@$env:DRAY_VERSION
         set DRAY_PATH=C:/Users/runneradmin/AppData/Local/dub/packages/dray-$env:DRAY_VERSION/dray
         copy raylib-dev_win64_msvc16/lib/raylib.lib %DRAY_PATH%/raylib.lib
+        copy glfw3_mt.lib %DRAY_PATH%/glfw3_mt.lib
 
         echo "show files"
         dir
