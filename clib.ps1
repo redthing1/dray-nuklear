@@ -58,6 +58,7 @@ function Build-Library {
         exit 1
     }
     Write-Host "raylib.h found at $env:RAYLIB_DIR\src\raylib.h"
+    Get-ChildItem "$env:RAYLIB_DIR\src\raylib.h"
 
     # set up build args
     $cmake_args = @()
