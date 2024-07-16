@@ -1,3 +1,3 @@
-#define AM_IMPLEMENTATION
+#define AMCW_IMPLEMENTATION
 
-#include "amoeba.h"
+#include "am_cassowary.h"
