@@ -27,6 +27,7 @@
 **********************************************************************************************/
 
 import raylib;
+import nuklear;
 import raylib_nuklear;
 
 int nk_tab(nk_context* ctx, const char* title, int active) {

@@ -35,8 +35,13 @@
 
 module raylib_nuklear;
 
+public {
+    static import raylib; // raylib
+    static import nuklear; // nuklear gui
+    static import cassowary; // constraint solver
+}
 import raylib;
-public import nuklear;
+import nuklear;
 
 extern (C) @nogc nothrow:
 
