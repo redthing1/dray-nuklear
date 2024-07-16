@@ -66,18 +66,18 @@ function Build-Library {
         Write-Error "RAYLIB_DIR is not set.."
         exit 1
     } else {
-        $cmake_args += "-DRAYLIB_DIR=$env:RAYLIB_DIR"
+        $cmake_args += "-DRAYLIB_DIR=`"$env:RAYLIB_DIR`""
     }
     if ($env:RELEASE -eq "1") {
         $cmake_args += "-DCMAKE_BUILD_TYPE=Release"
     } else {
         $cmake_args += "-DCMAKE_BUILD_TYPE=Debug"
     }
-
-    $cmake_args_string = $cmake_args -join " "
     
     # START BUILD
-    cmake -B build -S . $cmake_args_string
+    $cmake_command = "cmake -B build -S . $($cmake_args -join ' ')"
+    Write-Host "Executing: $cmake_command"
+    Invoke-Expression $cmake_command
     cmake --build build --config Release
     # END BUILD
 
