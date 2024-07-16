@@ -89,6 +89,9 @@ function Build-Library {
         Write-Error "Error: $LIB_NAME library not found at $PACKAGE_DIR\$LIB_FILE_NAME"
         exit 1
     }
+
+    # list directory
+    Get-ChildItem $PACKAGE_DIR
 }
 
 # Main execution
