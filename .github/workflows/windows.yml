@@ -27,7 +27,7 @@ jobs:
 
         echo "prebuild dray with libs"
         dub fetch dray@$env:DRAY_VERSION
-        $DRAY_PATH = "$env:APPDATA/dub/packages/dray-$env:DRAY_VERSION/dray"
+        $DRAY_PATH = "$env:LOCALAPPDATA/dub/packages/dray-$env:DRAY_VERSION/dray"
         echo "using dray path: $DRAY_PATH"
         dub list dray@$env:DRAY_VERSION
         cp raylib-dev_win64_msvc16/lib/raylib.lib $DRAY_PATH/raylib.lib
