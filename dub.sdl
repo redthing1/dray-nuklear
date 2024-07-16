@@ -11,6 +11,9 @@ lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="posix"
 
 // include the nuklear headers
 cImportPaths "raylib_nuklear_source/include"
+// include c source
+cSourcePaths "source"
+
 dflags "-P-I$PACKAGE_DIR/raylib_nuklear_source/include" // directly pass include path to C preprocessor
 
 preGenerateCommands "bash $PACKAGE_DIR/clib.sh prepare" platform="posix"
