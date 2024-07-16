@@ -6,8 +6,6 @@ license "apache-2.0"
 dependency "dray" version=">=5.0.0-r4 <5.1.0-0"
 targetType "library"
 
-libs "rlnuklear"
-
 lflags "$PACKAGE_DIR/rlnuklear.lib" platform="windows"
 lflags "-L$PACKAGE_DIR" "$PACKAGE_DIR/librlnuklear.a" platform="posix"
 
