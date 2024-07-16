@@ -31,6 +31,7 @@ jobs:
         copy raylib-dev_win64_msvc16/lib/raylib.lib $env:DRAY_PATH/raylib.lib
         copy glfw3_mt.lib $env:DRAY_PATH/glfw3_mt.lib
         dub build dray@$env:DRAY_VERSION
+        dir $env:DRAY_PATH
 
         echo "show files"
         dir
