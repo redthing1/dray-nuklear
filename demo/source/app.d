@@ -64,6 +64,7 @@ int main() {
     /* GUI */
     auto bg = ColorToNuklearF(Colors.SKYBLUE);
     auto ui_font = raylib.LoadFontEx("./res/SourceSansPro-Regular.ttf", FONT_SIZE, null, 0);
+    raylib.SetTextureFilter(ui_font.texture, raylib.TextureFilter.TEXTURE_FILTER_POINT);
     auto ctx = InitNuklearEx(ui_font, FONT_SIZE);
 
     // nk_color[nk_style_colors.NK_COLOR_COUNT] table;
