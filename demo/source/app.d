@@ -54,7 +54,7 @@ int main() {
     enum PAD = 8;
 
     SetConfigFlags(raylib.FLAG_WINDOW_HIGHDPI);
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "[raylib-nuklear] example");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "[dray-nuklear] demo");
 
     auto dpi_scale = cast(int) raylib.GetWindowScaleDPI().x;
 
