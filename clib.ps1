@@ -52,6 +52,11 @@ function Build-Library {
     # list RAYLIB_DIR
     Write-Host "RAYLIB_DIR: $env:RAYLIB_DIR"
     Get-ChildItem $env:RAYLIB_DIR
+    # ensure RAYLIB_DIR/src/raylib.h exists
+    if (-not (Test-Path "$env:RAYLIB_DIR\src\raylib.h")) {
+        Write-Error "Error: raylib.h not found at $env:RAYLIB_DIR\src\raylib.h"
+        exit 1
+    }
 
     # set up build args
     $cmake_args = @()
