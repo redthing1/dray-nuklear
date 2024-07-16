@@ -21,9 +21,9 @@ jobs:
         7z x raylib-dev_win64_msvc16.zip.zip
         7z x raylib-dev_win64_msvc16.zip
 
-        curl -L https://github.com/glfw/glfw/releases/download/3.3.7/glfw-3.3.7.bin.WIN64.zip --output glfw-3.3.7.bin.WIN64.zip
-        unzip glfw-3.3.7.bin.WIN64.zip
-        move glfw-3.3.7.bin.WIN64/lib-vc2022/glfw3_mt.lib ./glfw3_mt.lib
+        curl -L https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.bin.WIN64.zip --output glfw-3.4.bin.WIN64.zip
+        unzip glfw-3.4.bin.WIN64.zip
+        move glfw-3.4.bin.WIN64/lib-vc2022/glfw3_mt.lib ./glfw3_mt.lib
 
         echo "prebuild dray with libs"
         dub fetch dray@$env:DRAY_VERSION
