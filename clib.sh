@@ -30,7 +30,7 @@ ensure_command() {
         echo "Please install $1 and try again"
         exit 1
     fi
-    echo "$1 is available"
+    # echo "$1 is available"
 }
 
 # Ensure all required commands are available
@@ -44,7 +44,7 @@ prepare() {
     cd "$PACKAGE_DIR"
     
     if [ -d $SOURCETREE_DIR ]; then
-        echo "[$PROJECT] source folder already exists, using it."
+        echo "[$PROJECT] using existing source: $SOURCETREE_DIR"
     else
         echo "[$PROJECT] getting source to build $LIB_NAME"
         git clone --depth 1 --branch $SOURCETREE_BRANCH $SOURCETREE_URL $SOURCETREE_DIR

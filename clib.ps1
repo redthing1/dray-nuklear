@@ -20,7 +20,7 @@ function Ensure-Command($cmdname) {
         Write-Error "Please install $cmdname and try again"
         exit 1
     }
-    Write-Host "$cmdname is available"
+    # Write-Host "$cmdname is available"
 }
 
 # Ensure all required commands are available
@@ -51,14 +51,14 @@ function Build-Library {
 
     # list RAYLIB_DIR
     Write-Host "RAYLIB_DIR: $env:RAYLIB_DIR"
-    Get-ChildItem $env:RAYLIB_DIR
-    # ensure RAYLIB_DIR/src/raylib.h exists
-    if (-not (Test-Path "$env:RAYLIB_DIR\src\raylib.h")) {
-        Write-Error "Error: raylib.h not found at $env:RAYLIB_DIR\src\raylib.h"
-        exit 1
-    }
-    Write-Host "raylib.h found at $env:RAYLIB_DIR\src\raylib.h"
-    Get-ChildItem "$env:RAYLIB_DIR\src\raylib.h"
+    # Get-ChildItem $env:RAYLIB_DIR
+    # # ensure RAYLIB_DIR/src/raylib.h exists
+    # if (-not (Test-Path "$env:RAYLIB_DIR\src\raylib.h")) {
+    #     Write-Error "Error: raylib.h not found at $env:RAYLIB_DIR\src\raylib.h"
+    #     exit 1
+    # }
+    # Write-Host "raylib.h found at $env:RAYLIB_DIR\src\raylib.h"
+    # Get-ChildItem "$env:RAYLIB_DIR\src\raylib.h"
 
     # set up build args
     $cmake_args = @()
@@ -90,8 +90,8 @@ function Build-Library {
         exit 1
     }
 
-    # list directory
-    Get-ChildItem $PACKAGE_DIR
+    # # list directory
+    # Get-ChildItem $PACKAGE_DIR
 }
 
 # Main execution
