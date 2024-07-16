@@ -21,11 +21,11 @@ preGenerateCommands "powershell -File $PACKAGE_DIR/clib.ps1 prepare" platform="w
 configuration "release" {
 	targetType "library"
 	preBuildCommands "bash $PACKAGE_DIR/clib.sh build RAYLIB_DIR=$DRAY_PACKAGE_DIR/raylib_source RELEASE=1" platform="posix"
-	preBuildCommands "powershell -File $PACKAGE_DIR/clib.ps1 build RAYLIB_DIR=$DRAY_PACKAGE_DIR/raylib_source RELEASE=1" platform="windows"
+	preBuildCommands "powershell -File $PACKAGE_DIR/clib.ps1 build RAYLIB_DIR=$DRAY_PACKAGE_DIR\raylib_source RELEASE=1" platform="windows"
 }
 
 configuration "debug" {
 	targetType "library"
 	preBuildCommands "bash $PACKAGE_DIR/clib.sh build RAYLIB_DIR=$DRAY_PACKAGE_DIR/raylib_source" platform="posix"
-	preBuildCommands "powershell -File $PACKAGE_DIR/clib.ps1 build RAYLIB_DIR=$DRAY_PACKAGE_DIR/raylib_source" platform="windows"
+	preBuildCommands "powershell -File $PACKAGE_DIR/clib.ps1 build RAYLIB_DIR=$DRAY_PACKAGE_DIR\raylib_source" platform="windows"
 }
